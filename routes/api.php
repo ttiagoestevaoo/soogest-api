@@ -20,8 +20,8 @@ Route::post('login', 'AuthLoginController@login')->name("api.login");;
 Route::get('', function(){
 
     return [
-        'name' => 'Emerson',
-        'gênero' => 'Não definido'
+        'name' => "Emerson",
+        'gênero' => "Não definido"
     ];
 
 });
