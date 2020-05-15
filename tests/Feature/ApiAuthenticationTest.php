@@ -13,25 +13,14 @@ class ApiAuthenticationTest extends TestCase
     public function user_can_acess_api() 
     {   
         $this->withoutExceptionHandling();
+        $user = factory(User::class)->create();
 
-        
-        $this->post("/api/register", $atributtes = [
-            'email' => $this->faker->email,
-            'password' => $password = $this->faker->password,
-            'c_password' => $password,
-            'name' => "Tiago"
+        $response = $this->post("/api/login",[
+            'username' => $user->email,
+            'password' => 'inter123'
         ]);
 
-       $response = $this->post("/api/login",[
-            'email' => $atributtes['email'],
-            'password' => $atributtes['password']
-        ]);
-
-        $response=$this->post("/api/details",[
-            'token' => $response['access_token']
-        ]);
-        dd($response);
-
+        dd($response->getContent());
     }
 
     /** @test*/ 
@@ -40,7 +29,13 @@ class ApiAuthenticationTest extends TestCase
         $this->withoutExceptionHandling();
        $user = factory(User::class)->create();
 
-       
+       $http = new \GuzzleHttp\Client([
+        'base_uri' => 'http://192.168.15.2:8001',
+        'headers' => [
+            'Accept' => 'application/json; charset=utf-8'
+        ]
+       ]);
+
        $response = $this->post("/oauth/token" ,[
             'grant_type' => 'password',
             'client_id' => 3,
