@@ -17,8 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', 'AuthLoginController@register')->name("api.register");;
 Route::post('login', 'AuthLoginController@login')->name("api.login");;
 
-Route::group(['middleware' => 'auth:api'], function(){
+Route::get('', function(){
 
-Route::get('details', 'API\UserController@details');
+    return [
+        'name' => 'Emerson',
+        'gênero' => 'Não definido'
+    ];
 
 });
