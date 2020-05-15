@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthLoginController extends Controller
 {
@@ -30,5 +32,20 @@ class AuthLoginController extends Controller
             return response()->json('Something went wrong on the server', $erro->getCode());
 
         }
+    }
+
+    public function register(Request $request)
+    {
+        $request -> validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8']
+        ]);
+
+        return User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
     }
 }

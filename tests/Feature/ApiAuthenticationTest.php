@@ -24,6 +24,21 @@ class ApiAuthenticationTest extends TestCase
     }
 
     /** @test*/ 
+    public function user_can_register_on_api() 
+    {
+        $this->withoutExceptionHandling();
+
+        $response = $this->post("/api/register",[
+            'Content-Type' => 'multipart/form-data',
+            'Accept' => 'application/json',
+            'name' => $this->faker->name,
+            'email' => $this->faker->email,
+            'password' => 'inter123'
+        ]);
+        dd($response);
+    }
+
+    /** @test*/ 
     public function test_clients() 
     {
         $this->withoutExceptionHandling();
