@@ -18,7 +18,8 @@ class AuthLoginController extends Controller
                     'client_id' => config('services.passport.client_id'),
                     'client_secret' => config('services.passport.client_password'),
                     'username' => request('username'),
-                    'password' => request('password')
+                    'password' => request('password'),
+                    'score' => ''
                 ]
             ]);
             return $response->getBody();

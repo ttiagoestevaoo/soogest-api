@@ -1,12 +1,14 @@
 database:
     image: mysql:5.6
     environment:
-    - "MYSQL_ROOT_PASSWORD=inter123"
-    - "MYSQL_DATABASE=soogest"
+        - "MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}"
+        - "MYSQL_DATABASE=${DB_DATABASE}"
+        - "MYSQL_USER=${DB_USERNAME}" # change to whatever username you want
+        - "MYSQL_PASSWORD=${DB_PASSWORD}" #change to the password you want for user
     ports:
-    - "3307:3306"
+        - "3307:3306"
     volumes:
-    - "./database/mysql/:/var/lib/mysql"
+        - "./database/mysql/:/var/lib/mysql"
 
 php72:
     build: ./docker_config
