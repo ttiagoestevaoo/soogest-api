@@ -8,7 +8,7 @@ database:
     ports:
         - "3307:3306"
     volumes:
-        - "./database/mysql/:/var/lib/mysql"
+        - "./docker_config/mysql/:/var/lib/mysql"
 
 php72:
     build: ./docker_config
