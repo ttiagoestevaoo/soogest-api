@@ -33,7 +33,9 @@ Passport client configuration
 
 ```bash
 docker-compose exec php72 php artisan passport:install
-Apoś executar o comando, coloque CLIENT_ID e CLIENT_PASSWORD no .env nas variavéis do Passport
-Alterar APP_URL no .env para o ip da sua máquina . // xxx.xxx.xx.xx:8001
+
 
 ```
+ - Coloque CLIENT_ID e CLIENT_PASSWORD no .env PASSPORT_CLIENT_ID e PASSPORT_CLIENT_SECRET
+
+ - Alterar APP_URL no .env para o ip da sua máquina . // xxx.xxx.xx.xx:8001
