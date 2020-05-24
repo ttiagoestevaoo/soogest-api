@@ -23,6 +23,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 });
 
-Route::get("/",[
+Route::get("/",function(){
+  return  [
     1,2,3
-]);
+]});
