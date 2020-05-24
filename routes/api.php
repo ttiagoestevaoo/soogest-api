@@ -22,3 +22,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('details', 'API\UserController@details');
 
 });
+
+Route::get("/",[
+    1,2,3
+]);
