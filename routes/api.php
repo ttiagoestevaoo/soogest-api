@@ -24,6 +24,6 @@ Route::group(['middleware' => 'auth:api'], function(){
 });
 
 Route::get("/",function(){
-  return  [
-    1,2,3
-]});
+  return  json_encode([
+    1,2,3]);
+});
