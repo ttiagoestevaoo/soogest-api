@@ -17,7 +17,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::where('user_id',1)->get();
+        $projects = Project::where('user_id',Auth::id())->get();
         return json_encode($projects);
     }
 
@@ -50,7 +50,7 @@ class ProjectController extends Controller
         $project->name = $request->input('name');
         $project->description = $request->input('description');
         $project->deadline = $request->input('deadline');
-        $project->user_id = 1;
+        $project->user_id = Auth::id();
         $project->save();
         return $project;
     }
