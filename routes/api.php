@@ -19,6 +19,14 @@ Route::post('login', 'AuthLoginController@login')->name("api.login");;
 
 Route::group(['middleware' => 'auth:api'], function(){
 
+    Route::post('details', 'API\UserController@details');
+    Route::get('/projects','API\ProjectController@index')->name('projects');
+    Route::get('/projects/create','API\ProjectController@create');
+    Route::post('/projects','API\ProjectController@store');
+    Route::get('/projects/{project}','API\ProjectController@show');
+    Route::get('/projects/{project}/edit','API\ProjectController@edit');
+    Route::put('/projects/{project}','API\ProjectController@update');
+    Route::delete('/projects/{project}','API\ProjectController@destroy');
     Route::get('details', 'API\UserController@details');
 
 });
@@ -26,4 +34,5 @@ Route::group(['middleware' => 'auth:api'], function(){
 Route::get("/",function(){
   return  json_encode([
     1,2,3]);
+
 });
