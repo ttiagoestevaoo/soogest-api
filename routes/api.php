@@ -14,9 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('login', 'API\UserController@login')->name("api.login");
-Route::post('register', 'API\UserController@register')->name("api.register");;
+Route::post('register', 'AuthLoginController@register')->name("api.register");;
+Route::post('login', 'AuthLoginController@login')->name("api.login");;
+
 Route::group(['middleware' => 'auth:api'], function(){
+
     Route::post('details', 'API\UserController@details');
     Route::get('/projects','API\ProjectController@index')->name('projects');
     Route::get('/projects/create','API\ProjectController@create');
@@ -25,4 +27,12 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/projects/{project}/edit','API\ProjectController@edit');
     Route::put('/projects/{project}','API\ProjectController@update');
     Route::delete('/projects/{project}','API\ProjectController@destroy');
+    Route::get('details', 'API\UserController@details');
+
+});
+
+Route::get("/",function(){
+  return  json_encode([
+    1,2,3]);
+
 });
