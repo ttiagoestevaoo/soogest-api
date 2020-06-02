@@ -31,6 +31,7 @@ return [
     ],
     'passport' => [
         'login_endpoint' =>env('PASSPORT_LOGIN_ENDPOINT'),
+        'endpoint' => env('APP_URL') . "/api/",
         'client_id' =>env('PASSPORT_CLIENT_ID'),
         'client_password' =>env('PASSPORT_CLIENT_SECRET'),
     ]

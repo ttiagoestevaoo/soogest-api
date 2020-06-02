@@ -13,13 +13,14 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Auth::routes();
 
-Route::post('register', 'AuthLoginController@register')->name("api.register");;
-Route::post('login', 'AuthLoginController@login')->name("api.login");;
+Route::post('register', 'AuthLoginController@register')->name("api.register");
+Route::post('login', 'AuthLoginController@login')->name("api.login");
 
 Route::group(['middleware' => 'auth:api'], function(){
 
-    Route::post('details', 'API\UserController@details');
+    Route::post('logout','AuthLoginController@logout')->name("api.logout");
     Route::get('/projects','API\ProjectController@index')->name('projects');
     Route::get('/projects/create','API\ProjectController@create');
     Route::post('/projects','API\ProjectController@store');
@@ -27,7 +28,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/projects/{project}/edit','API\ProjectController@edit');
     Route::put('/projects/{project}','API\ProjectController@update');
     Route::delete('/projects/{project}','API\ProjectController@destroy');
-    Route::get('details', 'API\UserController@details');
+    Route::get('/user', 'UserController@show');
 
 });
 

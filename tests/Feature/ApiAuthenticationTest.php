@@ -20,7 +20,7 @@ class ApiAuthenticationTest extends TestCase
             'password' => 'inter123'
         ]);
 
-        dd($response->getContent());
+        dd($response);
     }
 
     /** @test*/ 
@@ -52,12 +52,44 @@ class ApiAuthenticationTest extends TestCase
         
         $token = json_decode($response->getContent());
 
-        $details = $this->get("/api/details",[
+        $http = new \GuzzleHttp\Client();
+        
+        $response = $http->post(config('services.passport.endpoint')."details",[ 'headers' => [
             'Accept' => 'application/json',
             'Authorization' => $token->token_type . " " . $token->access_token
-        ]);
+        ]]);
+      
 
-        dd(json_decode($details->getContent()));
+        dd(json_decode($response->getBody()));
     }
 
+    /** @test */
+    public function user_can_logout()
+    {
+        $user = factory(User::class)->create();
+
+        $response = $this->post("/api/login",[
+            'username' => $user->email,
+            'password' => 'inter123'
+        ]);
+        
+        $token = json_decode($response->getContent());
+        $http = new \GuzzleHttp\Client();
+
+        $response = $http->post(config('services.passport.endpoint')."logout",[ 'headers' => [
+            'Accept' => 'application/json',
+            'Authorization' => $token->token_type . " " . $token->access_token
+        ]]);
+
+        dd(json_decode($response->getBody()));
+
+        $response = $http->post(config('services.passport.endpoint')."logout",[ 'headers' => [
+            'Accept' => 'application/json',
+            'Authorization' => $token->token_type . " " . $token->access_token
+        ]]);
+
+        
+
+        dd(json_decode($response->getBody()));
+    }
 }
