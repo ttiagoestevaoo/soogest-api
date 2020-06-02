@@ -15,7 +15,7 @@ class ApiAuthenticationTest extends TestCase
         $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
 
-        $response = $this->post("/api/login",[
+        $response = $this->post("http://soogest-api.herokuapp.com/api/login",[
             'username' => $user->email,
             'password' => 'inter123'
         ]);
@@ -28,7 +28,7 @@ class ApiAuthenticationTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->post("/api/register",[
+        $response = $this->post("http://soogest-api.herokuapp.com/api/register",[
             'Content-Type' => 'multipart/form-data',
             'Accept' => 'application/json',
             'name' => $this->faker->name,
