@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthLoginController extends Controller
@@ -43,10 +44,19 @@ class AuthLoginController extends Controller
             'password' => ['required', 'string', 'min:8']
         ]);
 
-        return User::create([
+        return response()->json(User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password)
-        ]);
+        ]));
     }
+
+    public function logout()
+    {
+        $user = Auth::user()->token();
+        $user->revoke();
+        return $this->response('success','Logout realizado!');
+    }
+
+    
 }
