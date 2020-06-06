@@ -13,10 +13,12 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public static $HTTP_SUCCESS = 200;
+    public static $HTTP_OK = 200;
+    public static $HTTP_CREATED = 201; 
+    public static $HTTP_ACCEPTED = 202; 
+    
+    public static $HTTP_BAD_REQUEST = 400;
+    public static $HTTP_UNAUTHORIZED = 401;
+    public static $HTTP_METHOD_NOT_ALLOWED = 405;
 
-    public function response( string $messageType,string $message,$data=null, int $code = 200)
-    {
-        return response()->json(['message'=> ['type'=>'success', 'message' => $message], 'data' => $data], $code);
-    }
 }

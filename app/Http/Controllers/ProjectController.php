@@ -33,7 +33,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::where('user_id',Auth::id())->get();
-        return json_encode($projects);
+        return response()->json($projects);
     }
 
 
@@ -48,7 +48,7 @@ class ProjectController extends Controller
         $validator = $this->validateRequest($request);
         
         if ($validator->fails()) { 
-            return response()->json(['error'=>$validator->errors()], 401);            
+            return response()->json(['error'=>$validator->errors()], Controller::$HTTP_BAD_REQUEST);            
         }
 
         $project = new Project();
@@ -57,7 +57,7 @@ class ProjectController extends Controller
         $project->deadline = $request->input('deadline');
         $project->user_id = Auth::id();
         $project->save();
-        return $project;
+        return response()->json($project);
     }
 
     /**
@@ -70,7 +70,7 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         if ($project){
-            return json_encode($project);
+            return response()->json($project);
         }
         abort(404);
     }
@@ -89,14 +89,14 @@ class ProjectController extends Controller
         $validator = $this->validateRequest($request);
         
         if ($validator->fails()) { 
-            return response()->json(['error'=>$validator->errors()], 401);            
+            return response()->json(['error'=>$validator->errors()], Controller::$HTTP_BAD_REQUEST);            
         }
         $project = Project::find($id);
         $project->name = $request->input('name');
         $project->description = $request->input('description');
         $project->deadline = $request->input('deadline');
         $project->save();
-        return $project;
+        return response()->json($project);
     }
 
     /**
@@ -110,7 +110,7 @@ class ProjectController extends Controller
         $project = Project::find($id);
         if($project){
             $project->delete();
-            return json_encode('sucess');
+            return response()->json('Projeto deletado');
         }
         abort(404);
     }
