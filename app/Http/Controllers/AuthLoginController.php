@@ -55,7 +55,7 @@ class AuthLoginController extends Controller
     {
         $user = Auth::user()->token();
         $user->revoke();
-        return $this->response()->json('Logout realizado!');
+        return response()->json('Logout realizado!');
     }
 
     
