@@ -13,4 +13,3 @@ use Illuminate\Http\Request;
 |
 */
 
-Auth::routes();

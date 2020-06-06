@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,6 +10,21 @@ use Illuminate\Support\Facades\Validator;
 
 class ProjectController extends Controller
 {
+
+    /** Validate projects input
+     * 
+     * @return \Illuminate\Support\Facades\Validator
+     * 
+     */
+    public function validateRequest(Request $request)
+    {
+        return Validator::make($request->all(), [ 
+            'name' => 'required',
+            'description' => 'required',
+            'deadline' => 'required'
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,15 +36,6 @@ class ProjectController extends Controller
         return json_encode($projects);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -39,9 +45,8 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [ 
-            'name' => 'required'
-        ]);
+        $validator = $this->validateRequest($request);
+        
         if ($validator->fails()) { 
             return response()->json(['error'=>$validator->errors()], 401);            
         }
@@ -70,16 +75,7 @@ class ProjectController extends Controller
         abort(404);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        
-    }
+    
 
     /**
      * Update the specified resource in storage.
@@ -90,9 +86,8 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [ 
-            'name' => 'required'
-        ]);
+        $validator = $this->validateRequest($request);
+        
         if ($validator->fails()) { 
             return response()->json(['error'=>$validator->errors()], 401);            
         }
