@@ -14,6 +14,6 @@ class UserController extends Controller
     public function show() 
     { 
         $user = auth()->user();
-        return response()->json(['message'=> ['type'=>'success', 'message' => 'Registro usuário'], 'data' => $user]);
+        return response()->json($user);
     } 
 }
