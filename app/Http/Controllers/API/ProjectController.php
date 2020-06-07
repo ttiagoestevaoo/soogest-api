@@ -21,15 +21,6 @@ class ProjectController extends Controller
         return json_encode($projects);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -70,16 +61,6 @@ class ProjectController extends Controller
         abort(404);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        
-    }
 
     /**
      * Update the specified resource in storage.
