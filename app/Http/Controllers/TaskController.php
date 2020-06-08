@@ -18,7 +18,7 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Task::where('user_id',Auth::id())->get();
-        return json_encode($tasks);
+        return response()->json($tasks);
     }
 
     /**
@@ -33,7 +33,7 @@ class TaskController extends Controller
             'name' => 'required'
         ]);
         if ($validator->fails()) { 
-            return response()->json(['error'=>$validator->errors()], 401);            
+            return response()->json(['error'=>$validator->errors()], Controller::$HTTP_BAD_REQUEST);            
         }
 
         $task = new Task();
@@ -46,7 +46,7 @@ class TaskController extends Controller
         }
         $task->user_id = Auth::id();
         $task->save();
-        return $task;
+        return response()->json($task, Controller::$HTTP_CREATED);
     }
 
     /**
@@ -59,7 +59,7 @@ class TaskController extends Controller
     {
         $task = Task::find($id);
         if ($task){
-            return json_encode($task);
+            return response()->json($task);
         }
         abort(404);
     }
@@ -93,7 +93,7 @@ class TaskController extends Controller
             $task->task_id = $task_id;
         }
         $task->save();
-        return $task;
+        return response()->json($task);
     }
 
     /**
@@ -107,7 +107,7 @@ class TaskController extends Controller
         $task = Task::find($id);
         if($task){
             $task->delete();
-            return json_encode('sucess');
+            return response()->json();
         }
         abort(404);
     }
