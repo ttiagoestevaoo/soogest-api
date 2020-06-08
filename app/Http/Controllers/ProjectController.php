@@ -75,8 +75,6 @@ class ProjectController extends Controller
         abort(404);
     }
 
-    
-
     /**
      * Update the specified resource in storage.
      *
