@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,23 +20,24 @@ Route::post('login', 'AuthLoginController@login')->name("api.login");;
 
 Route::group(['middleware' => 'auth:api'], function(){
 
-    Route::post('details', 'API\UserController@details');
-    Route::get('/projects','API\ProjectController@index')->name('projects');
-    Route::post('/projects','API\ProjectController@store');
-    Route::get('/projects/{project}','API\ProjectController@show');
-    Route::put('/projects/{project}','API\ProjectController@update');
-    Route::delete('/projects/{project}','API\ProjectController@destroy');
-    Route::get('/tasks','API\TaskController@index')->name('tasks');
-    Route::post('/tasks','API\TaskController@store');
-    Route::get('/tasks/{task}','API\TaskController@show');
-    Route::put('/tasks/{task}','API\TaskController@update');
-    Route::delete('/tasks/{task}','API\TaskController@destroy');
+   
+    Route::get('/tasks','TaskController@index')->name('tasks');
+    Route::post('/tasks','TaskController@store');
+    Route::get('/tasks/{task}','TaskController@show');
+    Route::put('/tasks/{task}','TaskController@update');
+    Route::delete('/tasks/{task}','TaskController@destroy');
     Route::get('details', 'API\UserController@details');
+    Route::post('logout','AuthLoginController@logout')->name("api.logout");
+    Route::get('/projects','ProjectController@index')->name('projects');
+    Route::post('/projects','ProjectController@store');
+    Route::get('/projects/{project}','ProjectController@show');
+    Route::put('/projects/{project}','ProjectController@update');
+    Route::delete('/projects/{project}','ProjectController@destroy');
+    Route::get('/user', 'UserController@show');
 
 });
 
 Route::get("/",function(){
-  return  json_encode([
-    1,2,3]);
+  return  json_encode("Bem vindo a API do Soogest");
 
 });

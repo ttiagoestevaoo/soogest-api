@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token',"email_verified_at","created_at","updated_at","api_token"
     ];
 
     /**
@@ -38,11 +38,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    function projects(){
+    public function projects(){
         return $this->hasMany('App\Project');
     }
 
-    function tasks(){
+    public function tasks(){
         return $this->hasMany('App\Task');
+    }
+    public function oauthaccesstoken()
+    {
+        return $this->hasMany(OauthAccessToken::class);
     }
 }

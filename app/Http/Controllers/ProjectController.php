@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,6 +10,21 @@ use Illuminate\Support\Facades\Validator;
 
 class ProjectController extends Controller
 {
+
+    /** Validate projects input
+     * 
+     * @return \Illuminate\Support\Facades\Validator
+     * 
+     */
+    public function validateRequest(Request $request)
+    {
+        return Validator::make($request->all(), [ 
+            'name' => 'required',
+            'description' => 'required',
+            'deadline' => 'required'
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +33,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::where('user_id',Auth::id())->get();
-        return json_encode($projects);
+        return response()->json($projects);
     }
 
 
@@ -30,11 +45,10 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [ 
-            'name' => 'required'
-        ]);
+        $validator = $this->validateRequest($request);
+        
         if ($validator->fails()) { 
-            return response()->json(['error'=>$validator->errors()], 401);            
+            return response()->json(['error'=>$validator->errors()], Controller::$HTTP_BAD_REQUEST);            
         }
 
         $project = new Project();
@@ -43,7 +57,7 @@ class ProjectController extends Controller
         $project->deadline = $request->input('deadline');
         $project->user_id = Auth::id();
         $project->save();
-        return $project;
+        return response()->json($project);
     }
 
     /**
@@ -56,11 +70,10 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         if ($project){
-            return json_encode($project);
+            return response()->json($project);
         }
         abort(404);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -71,18 +84,17 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [ 
-            'name' => 'required'
-        ]);
+        $validator = $this->validateRequest($request);
+        
         if ($validator->fails()) { 
-            return response()->json(['error'=>$validator->errors()], 401);            
+            return response()->json(['error'=>$validator->errors()], Controller::$HTTP_BAD_REQUEST);            
         }
         $project = Project::find($id);
         $project->name = $request->input('name');
         $project->description = $request->input('description');
         $project->deadline = $request->input('deadline');
         $project->save();
-        return $project;
+        return response()->json($project);
     }
 
     /**
@@ -96,7 +108,7 @@ class ProjectController extends Controller
         $project = Project::find($id);
         if($project){
             $project->delete();
-            return json_encode('sucess');
+            return response()->json('Projeto deletado');
         }
         abort(404);
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthLoginController extends Controller
@@ -24,13 +25,13 @@ class AuthLoginController extends Controller
             ]);
             return $response->getBody();
         }catch(\GuzzleHttp\Exception\BadResponseException $erro){
-            if($erro->getCode()==400){
-                return response()->json('Invalid request. Please enter a username or a password', $erro->getCode());
-            }else if($erro->getCode()==401) {
-                return response()->json('Your credentials are incorrect', $erro->getCode());
+            if($erro->getCode()== Controller::$HTTP_BAD_REQUEST){
+                return response()->json('Insira um email e senha válida', $erro->getCode());
+            }else if($erro->getCode()==Controller::$HTTP_UNAUTHORIZED) {
+                return response()->json('Seus dados estão errados', $erro->getCode());
             }
 
-            return response()->json('Something went wrong on the server', $erro->getCode());
+            return response()->json('Alguma coisa deu errado no servidor', $erro->getCode());
 
         }
     }
@@ -43,10 +44,19 @@ class AuthLoginController extends Controller
             'password' => ['required', 'string', 'min:8']
         ]);
 
-        return User::create([
+        return response()->json(User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password)
-        ]);
+        ]));
     }
+
+    public function logout()
+    {
+        $user = Auth::user()->token();
+        $user->revoke();
+        return response()->json('Logout realizado!');
+    }
+
+    
 }
