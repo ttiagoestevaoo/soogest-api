@@ -4,6 +4,28 @@
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
+
+## Info routes
+
+| Routes             | Method |      Send    | Get   |      Auth     |
+|-------------------:|-------:|-------------:|------:|--------------:|
+| /login             |  POST  | {}           |       | N             |
+| /register          |  POST  | {}           |       | N             |
+| /logout            |  POST  | {}           |       | S             |
+| /user              |  GET   | {}           |       | S             |
+| /tasks             |  POST  | {}           |       | S             |
+| /tasks             |  GET   | {}           |       | S             |
+| /tasks/{task}      |  GET   | {}           |       | S             |
+| /tasks/{task}      |  PUT   | {}           |       | S             |
+| /tasks/{task}      | DELETE | {}           |       | S             |
+| /projects          |  GET   | {}           |       | S             |
+| /projects          |  POST  | {}           |       | S             |
+| /projects/{project}|  GET   | {}           |       | S             |
+| /projects/{project}|  PUT   | {}           |       | S             |
+| /projects/{project}| DELETE | {}           |       | S             |
+
+
+
 ## Requisites
 
     - docker >= 19.03.9
