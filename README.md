@@ -10,7 +10,7 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 | Routes             | Method |      Send    | Get   |      Auth     |
 |-------------------:|-------:|-------------:|------:|--------------:|
 | /login             |  POST  | {}           |       | N             |
-| /register          |  POST  | {}           |       | N             |
+| /register          |  POST  |{name: 'User'\n}|       | N             |
 | /logout            |  POST  | {}           |       | S             |
 | /user              |  GET   | {}           |       | S             |
 | /tasks             |  POST  | {}           |       | S             |
