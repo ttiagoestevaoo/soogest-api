@@ -9,20 +9,20 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 | Routes             | Method |      Send    | Get   |      Auth     |
 |-------------------:|-------:|-------------:|------:|--------------:|
-| /login             |  POST  | { username:'example@sooges.com.br',password: 'developer'} |{"token_type":"token_type","expires_in":31536000,"access_token":"access_token","refresh_token":"refresh_token"}| N             |
-| /register          |  POST  |{name: 'User', email: 'example@sooges.com.br', password: 'developer', c_password: 'developer}|{id:1,name: 'User', email: 'example@sooges.com.br'}| N             |
-| /logout            |  POST  |           |       | S             |
-| /user              |  GET   | {}           |       | S             |
-| /tasks             |  POST  | {}           |       | S             |
-| /tasks             |  GET   | {}           |       | S             |
-| /tasks/{task}      |  GET   | {}           |       | S             |
-| /tasks/{task}      |  PUT   | {}           |       | S             |
-| /tasks/{task}      | DELETE | {}           |       | S             |
-| /projects          |  GET   |            | [ {id:1, name: 'Project', description: 'Description project', deadline: 'Deadline date format'},{...}] | S             |
-| /projects          |  POST  |{name: 'Project', description: 'Description project', deadline: 'Deadline date format'}|{id:1, name: 'Project', description: 'Description project', deadline: 'Deadline date format'}| S             |
-| /projects/{project}|  GET   |          |{id:1, name: 'Project', description: 'Description project', deadline: 'Deadline date format'}| S             |
+| /login             |  POST  |{username:'example@sooges.com.br',password: 'developer'}|{"token_type":"token_type","expires_in":31536000,"access_token":"access_token","refresh_token":"refresh_token"}|N|
+| /register          |  POST  |{name: 'User', email: 'example@sooges.com.br', password: 'developer', c_password: 'developer}|{id:1,name: 'User', email: 'example@sooges.com.br'}| N|
+| /logout            |  POST  |||S|
+| /user              |  GET   | {}|{id:1,name: 'User', email: 'example@sooges.com.br'}|S|
+| /tasks             |  POST  | {}|| S|
+| /tasks             |  GET   | {}|| S|
+| /tasks/{task}      |  GET   | {}|| S|
+| /tasks/{task}      |  PUT   | {}|| S|
+| /tasks/{task}      | DELETE | {}|| S|
+| /projects          |  GET   ||[{id:1, name: 'Project', description: 'Description project', deadline: 'Deadline date format'},{...}]| S|
+| /projects          |  POST  |{name: 'Project', description: 'Description project', deadline: 'Deadline date format'}|{id:1, name: 'Project', description: 'Description project', deadline: 'Deadline date format'}| S|
+| /projects/{project}|  GET   ||{id:1, name: 'Project', description: 'Description project', deadline: 'Deadline date format'}| S|
 | /projects/{project}|  PUT   |{name: 'Project changed', description: 'Description project changed', deadline: 'Deadline date format changed'}|{id:1, name: 'Project changed', description: 'Description project changed', deadline: 'Deadline date format changed'}| S             |
-| /projects/{project}| DELETE |            |       | S             |
+| /projects/{project}| DELETE ||| S|
 
 
 
