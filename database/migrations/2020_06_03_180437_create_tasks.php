@@ -16,10 +16,10 @@ class CreateTasks extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
-            $table->date('deadline');
+            $table->string('description')->nullable();
+            $table->date('deadline')->nullable();
             $table->boolean('complete')->default(false);
-            $table->foreignId('project_id')->cascadeOnDelete();
+            $table->foreignId('project_id')->nullable()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
