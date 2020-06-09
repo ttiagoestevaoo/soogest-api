@@ -86,10 +86,6 @@ class TaskController extends Controller
         if (isset($complete)){
             $task->complete = $complete;
         }
-        $task_id = $request->input('task_id');
-        if ($task_id){
-            $task->task_id = $task_id;
-        }
         $task->save();
         return response()->json($task);
     }
