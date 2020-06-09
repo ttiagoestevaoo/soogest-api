@@ -46,10 +46,12 @@ class TaskController extends Controller
         $task->name = $request->input('name');
         $task->description = $request->input('description');
         $task->deadline = $request->input('deadline');
+
         $project_id = $request->input('project_id');
         if ($project_id){
             $task->project_id = $project_id;
         }
+
         $task->user_id = Auth::id();
         $task->save();
         return response()->json($task, Controller::$HTTP_CREATED);
@@ -83,7 +85,7 @@ class TaskController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [ 
-            'name' => 'required'
+            'name' => 'required',
         ]);
         if ($validator->fails()) { 
             return response()->json(['error'=>$validator->errors()], 401);            
@@ -96,10 +98,12 @@ class TaskController extends Controller
         if (isset($complete)){
             $task->complete = $complete;
         }
+
         $project_id = $request->input('project_id');
         if ($project_id){
             $task->project_id = $project_id;
         }
+
         $task->save();
         return response()->json($task);
     }
