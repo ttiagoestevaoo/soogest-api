@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Project;
+use App\Task;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -70,6 +71,8 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         if ($project){
+            $tasks = Task::where('project_id',$project->id)->get();
+            $project->tasks = $tasks; 
             return response()->json($project);
         }
         abort(404);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Project;
 use App\Task;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -19,6 +20,11 @@ class TaskController extends Controller
     {
         $tasks = Task::where('user_id',Auth::id())->get();
         return response()->json($tasks);
+    }
+
+    public function create(){
+        $projects = Project::where('user_id',Auth::id())->get();
+        return response()->json($projects);
     }
 
     /**
@@ -40,8 +46,12 @@ class TaskController extends Controller
         $task->name = $request->input('name');
         $task->description = $request->input('description');
         $task->deadline = $request->input('deadline');
-        $task->project_id = $request->input('project_id');
-       
+
+        $project_id = $request->input('project_id');
+        if ($project_id){
+            $task->project_id = $project_id;
+        }
+
         $task->user_id = Auth::id();
         $task->save();
         return response()->json($task, Controller::$HTTP_CREATED);
@@ -57,6 +67,8 @@ class TaskController extends Controller
     {
         $task = Task::find($id);
         if ($task){
+            $project = Project::find($task->project_id);
+            $task->project = $project;
             return response()->json($task);
         }
         abort(404);
@@ -86,6 +98,12 @@ class TaskController extends Controller
         if (isset($complete)){
             $task->complete = $complete;
         }
+
+        $project_id = $request->input('project_id');
+        if ($project_id){
+            $task->project_id = $project_id;
+        }
+
         $task->save();
         return response()->json($task);
     }
