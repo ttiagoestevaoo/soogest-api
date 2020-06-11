@@ -123,4 +123,27 @@ class TaskController extends Controller
         }
         abort(404);
     }
+
+     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function complete(Request $request, Task $task)
+    {
+        $validator = Validator::make($request->all(), [ 
+            'complete' => 'required|boolean'
+        ]);
+        if ($validator->fails()) { 
+            return response()->json(['error'=>$validator->errors()], 401);            
+        }
+        
+        $task->update([
+            'complete' => $request->complete
+        ]);
+
+        return response()->json($task);
+    }
 }
