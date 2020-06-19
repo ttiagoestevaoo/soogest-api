@@ -13,10 +13,11 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 | /register          |  POST  |{name: 'User', email: 'example@sooges.com.br', password: 'developer', c_password: 'developer}|{id:1,name: 'User', email: 'example@sooges.com.br'}| N|
 | /logout            |  POST  |||S|
 | /user              |  GET   | {}|{id:1,name: 'User', email: 'example@sooges.com.br'}|S|
-| /tasks             |  POST  | {}|| S|
-| /tasks             |  GET   | {}|| S|
-| /tasks/{task}      |  GET   | {}|| S|
-| /tasks/{task}      |  PUT   | {}|| S|
+| /tasks             |  POST  | { name: 'Task', description: 'Description project', deadline: 'Deadline date format', complete: boolean}|{id:1, name: 'Task', description: 'Description project', deadline: 'Deadline date format', complete: boolean}| S|
+| /tasks             |  GET   | [{id:1, name: 'Task', description: 'Description project', deadline: 'Deadline date format', complete: boolean},{...}]|| S|
+| /tasks/{task}      |  GET   | {id:1, name: 'Task', description: 'Description project', deadline: 'Deadline date format', complete: boolean}|| S|
+| /tasks/{task}      |  PUT   | {name: 'Task', description: 'Description project', deadline: 'Deadline date format', complete: boolean}|| S|
+| /tasks/{task}/complete     |  PUT   | {complete: boolean}|| S|
 | /tasks/{task}      | DELETE | {}|| S|
 | /projects          |  GET   ||[{id:1, name: 'Project', description: 'Description project', deadline: 'Deadline date format'},{...}]| S|
 | /projects          |  POST  |{name: 'Project', description: 'Description project', deadline: 'Deadline date format'}|{id:1, name: 'Project', description: 'Description project', deadline: 'Deadline date format'}| S|

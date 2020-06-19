@@ -144,6 +144,6 @@ class TaskController extends Controller
             'complete' => $request->complete
         ]);
 
-        return response()->json($task);
+        return response()->json();
     }
 }
