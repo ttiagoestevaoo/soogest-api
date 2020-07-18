@@ -2,7 +2,12 @@
 
 ## About API
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+API desenvolvida em Laravel, sendo consumida por site desenvolvido em Vue JS.
+
+
+Endereço API: http://soogest-api.herokuapp.com/api
+Endereço SITE: http://soogest.herokuapp.com/
+Endereço Github Site: https://github.com/ttiagoestevaoo/soogest-site.git
 
 
 ## Info routes
